@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progressive Blur</title>
+  <style>
+    :root {
+      --blur-height: 80px;
+    }
+
+    body { margin: 20px; font-family: sans-serif; }
+
+    .container {
+      position: relative;
+      width: 700px;
+      max-width: 100%;
+    }
+
+    p {
+      height: 500px;
+      overflow: scroll;
+    }
+
+    .progressive-blur {
+      position: absolute;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+      z-index: 20;
+      overflow: hidden;
+    }
+    .progressive-blur-top { top: 0;    height: var(--blur-height, 70px); }
+    .progressive-blur-bot { bottom: 0; height: var(--blur-height, 70px); }
+
+    .progressive-blur > .bl {
+      position: absolute;
+      inset: 0;
+      backdrop-filter: blur(var(--b));
+      -webkit-backdrop-filter: blur(var(--b));
+      will-change: backdrop-filter;
+    }
+
+    .progressive-blur-top .bl:nth-child(1) { --b: 0.05px; -webkit-mask-image: linear-gradient(to top, transparent 0%, black 5%); mask-image: linear-gradient(to top, transparent 0%, black 5%); }
+    .progressive-blur-top .bl:nth-child(2) { --b: 0.2px; -webkit-mask-image: linear-gradient(to top, transparent 0%, black 10%); mask-image: linear-gradient(to top, transparent 0%, black 10%); }
+    .progressive-blur-top .bl:nth-child(3) { --b: 0.5px; -webkit-mask-image: linear-gradient(to top, transparent 0%, black 30%); mask-image: linear-gradient(to top, transparent 0%, black 30%); }
+    .progressive-blur-top .bl:nth-child(4) { --b: 0.7px; -webkit-mask-image: linear-gradient(to top, transparent 10%, black 40%); mask-image: linear-gradient(to top, transparent 10%, black 40%); }
+    .progressive-blur-top .bl:nth-child(5) { --b: 1.1px; -webkit-mask-image: linear-gradient(to top, transparent 20%, black 50%); mask-image: linear-gradient(to top, transparent 20%, black 50%); }
+    .progressive-blur-top .bl:nth-child(6) { --b: 1.9px; -webkit-mask-image: linear-gradient(to top, transparent 30%, black 60%); mask-image: linear-gradient(to top, transparent 30%, black 60%); }
+    .progressive-blur-top .bl:nth-child(7) { --b: 3.5px; -webkit-mask-image: linear-gradient(to top, transparent 50%, black 80%); mask-image: linear-gradient(to top, transparent 50%, black 80%); }
+    .progressive-blur-top .bl:nth-child(8) { --b: 6.7px; -webkit-mask-image: linear-gradient(to top, transparent 70%, black 100%); mask-image: linear-gradient(to top, transparent 70%, black 100%); }
+
+    .progressive-blur-bot .bl:nth-child(1) { --b: 0.05px; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 5%); mask-image: linear-gradient(to bottom, transparent 0%, black 5%); }
+    .progressive-blur-bot .bl:nth-child(2) { --b: 0.2px; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%); mask-image: linear-gradient(to bottom, transparent 0%, black 10%); }
+    .progressive-blur-bot .bl:nth-child(3) { --b: 0.5px; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 30%); mask-image: linear-gradient(to bottom, transparent 0%, black 30%); }
+    .progressive-blur-bot .bl:nth-child(4) { --b: 0.7px; -webkit-mask-image: linear-gradient(to bottom, transparent 10%, black 40%); mask-image: linear-gradient(to bottom, transparent 10%, black 40%); }
+    .progressive-blur-bot .bl:nth-child(5) { --b: 1.1px; -webkit-mask-image: linear-gradient(to bottom, transparent 20%, black 50%); mask-image: linear-gradient(to bottom, transparent 20%, black 50%); }
+    .progressive-blur-bot .bl:nth-child(6) { --b: 1.9px; -webkit-mask-image: linear-gradient(to bottom, transparent 30%, black 60%); mask-image: linear-gradient(to bottom, transparent 30%, black 60%); }
+    .progressive-blur-bot .bl:nth-child(7) { --b: 3.5px; -webkit-mask-image: linear-gradient(to bottom, transparent 50%, black 80%); mask-image: linear-gradient(to bottom, transparent 50%, black 80%); }
+    .progressive-blur-bot .bl:nth-child(8) { --b: 6.7px; -webkit-mask-image: linear-gradient(to bottom, transparent 70%, black 100%); mask-image: linear-gradient(to bottom, transparent 70%, black 100%); }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <p>Velit esse autem sed dolores facere aperiam ab provident eveniet quia ratione et voluptatem quia ipsum. Et ipsam tempore cum iusto perferendis et temporibus sint nostrum molestiae quia quisquam laborum. Nisi a qui voluptatem. Est explicabo non non dolor debitis sed quaerat repudiandae. Magni voluptas autem et minus pariatur velit eveniet suscipit molestias laboriosam qui voluptatem. Quisquam officia minus voluptas dolor tempore et quod qui qui ut. Dicta est eveniet porro fuga recusandae doloribus minus excepturi temporibus nostrum corrupti. Rerum vitae veritatis perferendis velit quisquam nesciunt unde id consectetur laborum nihil assumenda dolor ut ex. Ut dolorem eos dolor et beatae. Velit et provident sint nulla quia libero voluptatem cumque tempora animi. Aut laboriosam harum aut nihil rerum ut dignissimos cupiditate nesciunt est reiciendis beatae. Perspiciatis aliquam nihil eos deserunt eum et laborum molestias nihil quis.
+Sint et porro quia est et molestiae nesciunt voluptatibus error occaecati ut. Voluptas ut aut architecto. Sunt sit iusto accusamus enim quia ut. Fugit voluptas quia qui sit quaerat atque voluptatem autem dolor distinctio itaque nemo repellendus. Aut mollitia veniam ut. Aut qui sed architecto doloribus similique. Odit aut expedita et quibusdam est sint omnis itaque provident dolores ea et quod. Ut illum cum quia illum sed vel vel necessitatibus minima ut eos omnis debitis eveniet.
+Praesentium corporis a corrupti ut voluptatem eos ea et amet quasi voluptatem. Omnis laboriosam facilis libero qui est tempore dolorum. Facilis reiciendis doloremque ullam quo eius nihil quidem. Sequi necessitatibus qui nihil est deleniti natus.
+Quae tenetur ut dicta porro quo facilis perspiciatis quis. Excepturi consequatur qui ut quo ut numquam tempore deleniti animi. Neque consequatur occaecati facilis voluptas. Ut aut quia est quo aut omnis est quaerat error debitis rerum. Saepe minus voluptate enim qui quam illo commodi error aut autem et. Placeat autem quis dolorum. Qui perferendis at ut id facilis hic corrupti dolorem fuga porro facilis laboriosam eum minus voluptas. Delectus occaecati provident accusantium molestias at veritatis perspiciatis optio sint dolor omnis culpa non qui vero.
+Quia mollitia incidunt id. Labore doloremque est esse quia quis laborum molestiae harum laborum enim. Exercitationem eum at aspernatur dolorum architecto consequatur sed odit voluptas voluptatem ducimus voluptatem odio soluta inventore. Tempora quia laboriosam nemo.
+Nostrum accusamus in sed harum eius. Ducimus architecto quam est vel commodi reprehenderit. Nulla perferendis veniam quisquam. Iure ratione similique voluptatem voluptatum ullam dolorum dolores alias quos et dolores tempore dolor. Beatae tempora ut debitis vitae sint.
+Ad ratione accusamus nemo porro facilis dolores nam quo excepturi culpa enim tempora. Neque consectetur nulla incidunt maxime fugiat eligendi ut impedit id quod facilis est et itaque. Doloremque impedit consequuntur accusantium itaque nulla soluta nihil labore qui corporis in nemo aut nihil. Ea numquam aliquid aspernatur quod dolore non. Enim officiis et consectetur non laboriosam consequatur earum eos itaque repellendus odit quia provident expedita. Modi nihil dolor rem officiis ducimus quia debitis.
+Ullam incidunt fuga delectus tenetur quaerat officiis. Voluptas possimus quae velit natus rerum dolor itaque. Placeat mollitia molestiae in harum sed ipsam doloribus ut saepe consequuntur facere sed. Qui voluptate non sequi quod expedita veniam earum odit quos.
+Iusto modi ut veniam ducimus hic vel laudantium nulla laboriosam. Consequatur fugit velit quasi voluptatem odio expedita recusandae tenetur laboriosam totam vel nam. Iste incidunt qui voluptas voluptas temporibus sunt voluptatem minima et saepe tenetur recusandae ut sit suscipit. Occaecati aperiam praesentium placeat consequatur voluptatem dolores id beatae ut aut recusandae repellat reiciendis voluptatem. Dolor dolor ut iusto reprehenderit voluptatibus quia aut ullam a impedit. Enim sapiente optio culpa a minus aut nobis id repudiandae eos. Itaque omnis cum rerum amet ipsum et eos et provident totam quod enim nobis. Mollitia ut sequi fugit sit in qui quia quo omnis facilis quae doloremque mollitia. Enim quis quam vitae sit quia voluptatibus.
+Non ullam cupiditate doloribus velit qui tempora sed dolorem praesentium voluptas. Sed cumque laudantium placeat eligendi qui voluptatem placeat debitis velit consequatur ut nihil aut sint. Officia animi dolorem nemo placeat dolor quae voluptatum nihil sed iusto est. Praesentium sed possimus inventore a magni est ipsum nihil. Omnis dolor sequi nemo. Ex molestiae ab omnis cupiditate iure molestiae quas qui consequuntur qui cum molestias voluptatum.
+Et rerum ducimus rerum vero et reiciendis ipsum mollitia dolores omnis repudiandae unde.
+Sit dolor quia quis ea voluptate eligendi maxime illum sint neque cumque velit amet illo.
+Ea quia quis corrupti qui nostrum molestias ex.
+Excepturi perferendis autem earum at autem sapiente incidunt quis ullam repellat ab dolorem qui cupiditate.
+Aliquam aut eveniet est corporis sit sed consequuntur nemo fugiat hic atque nihil a.
+Nulla voluptatem ipsum modi quaerat velit voluptatem ullam animi maiores voluptate expedita placeat quo.
+Est quo rerum rerum tenetur itaque dolores voluptatem tenetur vitae quis soluta sit ut eum.
+Velit esse autem sed dolores facere aperiam ab provident eveniet quia ratione et voluptatem quia ipsum. Et ipsam tempore cum iusto perferendis et temporibus sint nostrum molestiae quia quisquam laborum. Nisi a qui voluptatem. Est explicabo non non dolor debitis sed quaerat repudiandae. Magni voluptas autem et minus pariatur velit eveniet suscipit molestias laboriosam qui voluptatem. Quisquam officia minus voluptas dolor tempore et quod qui qui ut. Dicta est eveniet porro fuga recusandae doloribus minus excepturi temporibus nostrum corrupti. Rerum vitae veritatis perferendis velit quisquam nesciunt unde id consectetur laborum nihil assumenda dolor ut ex. Ut dolorem eos dolor et beatae. Velit et provident sint nulla quia libero voluptatem cumque tempora animi. Aut laboriosam harum aut nihil rerum ut dignissimos cupiditate nesciunt est reiciendis beatae. Perspiciatis aliquam nihil eos deserunt eum et laborum molestias nihil quis.
+Sint et porro quia est et molestiae nesciunt voluptatibus error occaecati ut. Voluptas ut aut architecto. Sunt sit iusto accusamus enim quia ut. Fugit voluptas quia qui sit quaerat atque voluptatem autem dolor distinctio itaque nemo repellendus. Aut mollitia veniam ut. Aut qui sed architecto doloribus similique. Odit aut expedita et quibusdam est sint omnis itaque provident dolores ea et quod. Ut illum cum quia illum sed vel vel necessitatibus minima ut eos omnis debitis eveniet.
+Praesentium corporis a corrupti ut voluptatem eos ea et amet quasi voluptatem. Omnis laboriosam facilis libero qui est tempore dolorum. Facilis reiciendis doloremque ullam quo eius nihil quidem. Sequi necessitatibus qui nihil est deleniti natus.
+Quae tenetur ut dicta porro quo facilis perspiciatis quis. Excepturi consequatur qui ut quo ut numquam tempore deleniti animi. Neque consequatur occaecati facilis voluptas. Ut aut quia est quo aut omnis est quaerat error debitis rerum. Saepe minus voluptate enim qui quam illo commodi error aut autem et. Placeat autem quis dolorum. Qui perferendis at ut id facilis hic corrupti dolorem fuga porro facilis laboriosam eum minus voluptas. Delectus occaecati provident accusantium molestias at veritatis perspiciatis optio sint dolor omnis culpa non qui vero.
+Quia mollitia incidunt id. Labore doloremque est esse quia quis laborum molestiae harum laborum enim. Exercitationem eum at aspernatur dolorum architecto consequatur sed odit voluptas voluptatem ducimus voluptatem odio soluta inventore. Tempora quia laboriosam nemo.
+Nostrum accusamus in sed harum eius. Ducimus architecto quam est vel commodi reprehenderit. Nulla perferendis veniam quisquam. Iure ratione similique voluptatem voluptatum ullam dolorum dolores alias quos et dolores tempore dolor. Beatae tempora ut debitis vitae sint.
+Ad ratione accusamus nemo porro facilis dolores nam quo excepturi culpa enim tempora. Neque consectetur nulla incidunt maxime fugiat eligendi ut impedit id quod facilis est et itaque. Doloremque impedit consequuntur accusantium itaque nulla soluta nihil labore qui corporis in nemo aut nihil. Ea numquam aliquid aspernatur quod dolore non. Enim officiis et consectetur non laboriosam consequatur earum eos itaque repellendus odit quia provident expedita. Modi nihil dolor rem officiis ducimus quia debitis.
+Ullam incidunt fuga delectus tenetur quaerat officiis. Voluptas possimus quae velit natus rerum dolor itaque. Placeat mollitia molestiae in harum sed ipsam doloribus ut saepe consequuntur facere sed. Qui voluptate non sequi quod expedita veniam earum odit quos.
+Iusto modi ut veniam ducimus hic vel laudantium nulla laboriosam. Consequatur fugit velit quasi voluptatem odio expedita recusandae tenetur laboriosam totam vel nam. Iste incidunt qui voluptas voluptas temporibus sunt voluptatem minima et saepe tenetur recusandae ut sit suscipit. Occaecati aperiam praesentium placeat consequatur voluptatem dolores id beatae ut aut recusandae repellat reiciendis voluptatem. Dolor dolor ut iusto reprehenderit voluptatibus quia aut ullam a impedit. Enim sapiente optio culpa a minus aut nobis id repudiandae eos. Itaque omnis cum rerum amet ipsum et eos et provident totam quod enim nobis. Mollitia ut sequi fugit sit in qui quia quo omnis facilis quae doloremque mollitia. Enim quis quam vitae sit quia voluptatibus.
+Non ullam cupiditate doloribus velit qui tempora sed dolorem praesentium voluptas. Sed cumque laudantium placeat eligendi qui voluptatem placeat debitis velit consequatur ut nihil aut sint. Officia animi dolorem nemo placeat dolor quae voluptatum nihil sed iusto est. Praesentium sed possimus inventore a magni est ipsum nihil. Omnis dolor sequi nemo. Ex molestiae ab omnis cupiditate iure molestiae quas qui consequuntur qui cum molestias voluptatum.
+Et rerum ducimus rerum vero et reiciendis ipsum mollitia dolores omnis repudiandae unde.
+Sit dolor quia quis ea voluptate eligendi maxime illum sint neque cumque velit amet illo.
+Ea quia quis corrupti qui nostrum molestias ex.
+Excepturi perferendis autem earum at autem sapiente incidunt quis ullam repellat ab dolorem qui cupiditate.
+Aliquam aut eveniet est corporis sit sed consequuntur nemo fugiat hic atque nihil a.
+Nulla voluptatem ipsum modi quaerat velit voluptatem ullam animi maiores voluptate expedita placeat quo.
+Est quo rerum rerum tenetur itaque dolores voluptatem tenetur vitae quis soluta sit ut eum.
+  </p>
+
+  <div class="progressive-blur progressive-blur-top">
+    <div class="bl"></div><div class="bl"></div><div class="bl"></div><div class="bl"></div><div class="bl"></div><div class="bl"></div><div class="bl"></div><div class="bl"></div>
+  </div>
+  <div class="progressive-blur progressive-blur-bot">
+    <div class="bl"></div><div class="bl"></div><div class="bl"></div><div class="bl"></div><div class="bl"></div><div class="bl"></div><div class="bl"></div><div class="bl"></div>
+  </div>
+</div>
+
+</body>
+</html>
