@@ -10,6 +10,7 @@
   <style>
     :root {
       --blur-height: 80px;
+      --fade-color: 255, 255, 255;
     }
 
     html {
@@ -47,6 +48,14 @@
       z-index: 20;
       overflow: hidden;
     }
+    .progressive-blur::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    
     .progressive-blur-top { top: 0;    height: var(--blur-height, 70px); }
     .progressive-blur-bot { bottom: 0; height: var(--blur-height, 70px); }
 
@@ -75,6 +84,24 @@
     .progressive-blur-bot .bl:nth-child(6) { --b: 1.9px; -webkit-mask-image: linear-gradient(to bottom, transparent 30%, black 60%); mask-image: linear-gradient(to bottom, transparent 30%, black 60%); }
     .progressive-blur-bot .bl:nth-child(7) { --b: 3.5px; -webkit-mask-image: linear-gradient(to bottom, transparent 50%, black 80%); mask-image: linear-gradient(to bottom, transparent 50%, black 80%); }
     .progressive-blur-bot .bl:nth-child(8) { --b: 6.7px; -webkit-mask-image: linear-gradient(to bottom, transparent 70%, black 100%); mask-image: linear-gradient(to bottom, transparent 70%, black 100%); }
+
+    .progressive-blur-top::after {
+      background: linear-gradient(
+        to bottom,
+        rgba(var(--fade-color), 1) 0%,
+        rgba(var(--fade-color), 0.6) 35%,
+        rgba(var(--fade-color), 0) 100%
+      );
+    }
+
+    .progressive-blur-bot::after {
+      background: linear-gradient(
+        to top,
+        rgba(var(--fade-color), 1) 0%,
+        rgba(var(--fade-color), 0.6) 35%,
+        rgba(var(--fade-color), 0) 100%
+      );
+    }
   </style>
 </head>
 <body>
