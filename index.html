@@ -26,6 +26,36 @@
       overscroll-behavior-y: contain;
     }
 
+    body.checker {
+      background-image: conic-gradient(
+        rgba(var(--text-color), 0.12) 25%,
+        transparent 0 50%,
+        rgba(var(--text-color), 0.12) 0 75%,
+        transparent 0
+      );
+      background-size: 40px 40px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    .controls label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .controls input {
+      accent-color: rgb(var(--text-color));
+    }
+    .controls input:disabled + span {
+      opacity: 0.4;
+    }
+
     .container {
       position: relative;
       width: 700px;
@@ -88,6 +118,20 @@
     .progressive-blur-bot .bl:nth-child(7) { --b: 3.5px; -webkit-mask-image: linear-gradient(to bottom, transparent 50%, black 80%); mask-image: linear-gradient(to bottom, transparent 50%, black 80%); }
     .progressive-blur-bot .bl:nth-child(8) { --b: 6.7px; -webkit-mask-image: linear-gradient(to bottom, transparent 70%, black 100%); mask-image: linear-gradient(to bottom, transparent 70%, black 100%); }
 
+    .container.low-end .progressive-blur > .bl:nth-child(n+5) { display: none; }
+
+    .low-end .progressive-blur-top .bl:nth-child(1) { --b: 0.08px; -webkit-mask-image: linear-gradient(to top, transparent 0%, black 5%); mask-image: linear-gradient(to top, transparent 0%, black 5%); }
+    .low-end .progressive-blur-top .bl:nth-child(2) { --b: 0.7px; -webkit-mask-image: linear-gradient(to top, transparent 5%, black 30%); mask-image: linear-gradient(to top, transparent 5%, black 25%); }
+    .low-end .progressive-blur-top .bl:nth-child(3) { --b: 2px; -webkit-mask-image: linear-gradient(to top, transparent 30%, black 60%); mask-image: linear-gradient(to top, transparent 30%, black 60%); }
+    .low-end .progressive-blur-top .bl:nth-child(4) { --b: 4.8px; -webkit-mask-image: linear-gradient(to top, transparent 70%, black 80%); mask-image: linear-gradient(to top, transparent 70%, black 100%); }
+
+    .low-end .progressive-blur-bot .bl:nth-child(1) { --b: 0.08px; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 5%); mask-image: linear-gradient(to bottom, transparent 0%, black 5%); }
+    .low-end .progressive-blur-bot .bl:nth-child(2) { --b: 0.7px; -webkit-mask-image: linear-gradient(to bottom, transparent 5%, black 30%); mask-image: linear-gradient(to bottom, transparent 5%, black 25%); }
+    .low-end .progressive-blur-bot .bl:nth-child(3) { --b: 2px; -webkit-mask-image: linear-gradient(to bottom, transparent 30%, black 60%); mask-image: linear-gradient(to bottom, transparent 30%, black 60%); }
+    .low-end .progressive-blur-bot .bl:nth-child(4) { --b: 4.8px; -webkit-mask-image: linear-gradient(to bottom, transparent 70%, black 100%); mask-image: linear-gradient(to bottom, transparent 70%, black 100%); }
+
+    .container.no-blur .progressive-blur > .bl { display: none; }
+
     .progressive-blur-top::after {
       background: linear-gradient(
         to bottom,
@@ -114,6 +158,12 @@
   </style>
 </head>
 <body>
+
+<div class="controls">
+  <label><input type="checkbox" id="toggle-blur" checked><span>Progressive blur</span></label>
+  <label><input type="checkbox" id="toggle-low-end"><span>Low-end mode</span></label>
+  <label><input type="checkbox" id="toggle-checker"><span>Checker background</span></label>
+</div>
 
 <div class="container">
   <p>
@@ -217,6 +267,24 @@ Write to me quickly that he has come back.
     <div class="bl"></div><div class="bl"></div><div class="bl"></div><div class="bl"></div><div class="bl"></div><div class="bl"></div><div class="bl"></div><div class="bl"></div>
   </div>
 </div>
+
+<script>
+  const container = document.querySelector('.container');
+  const blurToggle = document.getElementById('toggle-blur');
+  const lowEndToggle = document.getElementById('toggle-low-end');
+  const checkerToggle = document.getElementById('toggle-checker');
+
+  blurToggle.addEventListener('change', () => {
+    container.classList.toggle('no-blur', !blurToggle.checked);
+    lowEndToggle.disabled = !blurToggle.checked;
+  });
+  lowEndToggle.addEventListener('change', () => {
+    container.classList.toggle('low-end', lowEndToggle.checked);
+  });
+  checkerToggle.addEventListener('change', () => {
+    document.body.classList.toggle('checker', checkerToggle.checked);
+  });
+</script>
 
 </body>
 </html>
