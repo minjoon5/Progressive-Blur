@@ -127,6 +127,10 @@
     .low-end .progressive-blur-bot .bl:nth-child(3) { --b: 3.4px; -webkit-mask-image: linear-gradient(to bottom, transparent 20%, black 60%); mask-image: linear-gradient(to bottom, transparent 20%, black 60%); }
     .low-end .progressive-blur-bot .bl:nth-child(4) { --b: 6.0px; -webkit-mask-image: linear-gradient(to bottom, transparent 65%, black 80%); mask-image: linear-gradient(to bottom, transparent 65%, black 80%); }
 
+    .container.single-blur .progressive-blur > .bl:nth-child(n+2) { display: none; }
+    .container.single-blur .progressive-blur-top .bl:nth-child(1) { --b: 6.7px; -webkit-mask-image: linear-gradient(to top, transparent 0%, black 100%); mask-image: linear-gradient(to top, transparent 0%, black 100%); }
+    .container.single-blur .progressive-blur-bot .bl:nth-child(1) { --b: 6.7px; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 100%); mask-image: linear-gradient(to bottom, transparent 0%, black 100%); }
+
     .container.no-blur .progressive-blur > .bl { display: none; }
     .container.no-gradient .progressive-blur::after { display: none; }
 
@@ -160,6 +164,7 @@
 <div class="controls">
   <label><input type="checkbox" id="toggle-blur" checked><span>Progressive blur</span></label>
   <label><input type="checkbox" id="toggle-low-end"><span>Low-end mode</span></label>
+  <label><input type="checkbox" id="toggle-single"><span>Single blur (6.7px)</span></label>
   <label><input type="checkbox" id="toggle-gradient" checked><span>Linear gradient</span></label>
   <label><input type="checkbox" id="toggle-checker"><span>Checker background</span></label>
 </div>
@@ -271,16 +276,25 @@ Write to me quickly that he has come back.
   const container = document.querySelector('.container');
   const blurToggle = document.getElementById('toggle-blur');
   const lowEndToggle = document.getElementById('toggle-low-end');
+  const singleToggle = document.getElementById('toggle-single');
   const gradientToggle = document.getElementById('toggle-gradient');
   const checkerToggle = document.getElementById('toggle-checker');
 
   blurToggle.addEventListener('change', () => {
     container.classList.toggle('no-blur', !blurToggle.checked);
-    lowEndToggle.disabled = !blurToggle.checked;
+    updateDisabled();
   });
   lowEndToggle.addEventListener('change', () => {
     container.classList.toggle('low-end', lowEndToggle.checked);
   });
+  singleToggle.addEventListener('change', () => {
+    container.classList.toggle('single-blur', singleToggle.checked);
+    updateDisabled();
+  });
+  function updateDisabled() {
+    lowEndToggle.disabled = !blurToggle.checked || singleToggle.checked;
+    singleToggle.disabled = !blurToggle.checked;
+  }
   gradientToggle.addEventListener('change', () => {
     container.classList.toggle('no-gradient', !gradientToggle.checked);
   });
