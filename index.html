@@ -162,9 +162,9 @@
 <body>
 
 <div class="controls">
-  <label><input type="checkbox" id="toggle-blur" checked><span>Progressive blur</span></label>
-  <label><input type="checkbox" id="toggle-low-end"><span>Low-end mode</span></label>
-  <label><input type="checkbox" id="toggle-single"><span>Single blur (6.7px)</span></label>
+  <label><input type="checkbox" class="blur-mode" value="8" checked><span>Blur (8-stack)</span></label>
+  <label><input type="checkbox" class="blur-mode" value="4"><span>Blur (4-stack)</span></label>
+  <label><input type="checkbox" class="blur-mode" value="1"><span>Blur (1-stack)</span></label>
   <label><input type="checkbox" id="toggle-gradient" checked><span>Linear gradient</span></label>
   <label><input type="checkbox" id="toggle-checker"><span>Checker background</span></label>
 </div>
@@ -274,27 +274,18 @@ Write to me quickly that he has come back.
 
 <script>
   const container = document.querySelector('.container');
-  const blurToggle = document.getElementById('toggle-blur');
-  const lowEndToggle = document.getElementById('toggle-low-end');
-  const singleToggle = document.getElementById('toggle-single');
+  const blurModes = document.querySelectorAll('.blur-mode');
   const gradientToggle = document.getElementById('toggle-gradient');
   const checkerToggle = document.getElementById('toggle-checker');
 
-  blurToggle.addEventListener('change', () => {
-    container.classList.toggle('no-blur', !blurToggle.checked);
-    updateDisabled();
-  });
-  lowEndToggle.addEventListener('change', () => {
-    container.classList.toggle('low-end', lowEndToggle.checked);
-  });
-  singleToggle.addEventListener('change', () => {
-    container.classList.toggle('single-blur', singleToggle.checked);
-    updateDisabled();
-  });
-  function updateDisabled() {
-    lowEndToggle.disabled = !blurToggle.checked || singleToggle.checked;
-    singleToggle.disabled = !blurToggle.checked;
-  }
+  // At most one blur mode can be selected; none selected means no blur.
+  blurModes.forEach(input => input.addEventListener('change', () => {
+    if (input.checked) blurModes.forEach(other => { if (other !== input) other.checked = false; });
+    const mode = [...blurModes].find(m => m.checked)?.value;
+    container.classList.toggle('no-blur', !mode);
+    container.classList.toggle('low-end', mode === '4');
+    container.classList.toggle('single-blur', mode === '1');
+  }));
   gradientToggle.addEventListener('change', () => {
     container.classList.toggle('no-gradient', !gradientToggle.checked);
   });
