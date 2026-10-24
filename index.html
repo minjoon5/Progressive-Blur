@@ -281,13 +281,12 @@ Write to me quickly that he has come back.
   const gradientToggle = document.getElementById('toggle-gradient');
   const checkerToggle = document.getElementById('toggle-checker');
 
-  // At most one blur mode can be selected; none selected means no blur.
   blurModes.forEach(input => input.addEventListener('change', () => {
     if (input.checked) blurModes.forEach(other => { if (other !== input) other.checked = false; });
     const mode = [...blurModes].find(m => m.checked)?.value;
     container.classList.toggle('no-blur', !mode);
-    container.classList.toggle('low-end', mode === '4');
-    container.classList.toggle('single-blur', mode === '1');
+    container.classList.toggle('four-stack', mode === '4');
+    container.classList.toggle('one-stack', mode === '1');
   }));
   gradientToggle.addEventListener('change', () => {
     container.classList.toggle('no-gradient', !gradientToggle.checked);
