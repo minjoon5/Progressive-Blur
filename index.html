@@ -36,6 +36,11 @@
       background-size: 40px 40px;
     }
 
+    p.color {
+      background-color: rgb(0, 102, 255);
+      color: rgb(255, 255, 255);
+    }
+
     .controls {
       display: flex;
       flex-wrap: wrap;
@@ -170,6 +175,7 @@
   <label><input type="checkbox" class="blur-mode" value="1"><span>Blur (1-stack)</span></label>
   <label><input type="checkbox" id="toggle-gradient" checked><span>Linear gradient</span></label>
   <label><input type="checkbox" id="toggle-checker"><span>Checker pattern</span></label>
+  <label><input type="checkbox" id="toggle-color"><span>Color</span></label>
 </div>
 
 <div class="container">
@@ -280,6 +286,8 @@ Write to me quickly that he has come back.
   const blurModes = document.querySelectorAll('.blur-mode');
   const gradientToggle = document.getElementById('toggle-gradient');
   const checkerToggle = document.getElementById('toggle-checker');
+  const colorToggle = document.getElementById('toggle-color');
+  const text = document.querySelector('.container p');
 
   blurModes.forEach(input => input.addEventListener('change', () => {
     if (input.checked) blurModes.forEach(other => { if (other !== input) other.checked = false; });
@@ -292,7 +300,14 @@ Write to me quickly that he has come back.
     container.classList.toggle('no-gradient', !gradientToggle.checked);
   });
   checkerToggle.addEventListener('change', () => {
-    document.querySelector('.container p').classList.toggle('checker', checkerToggle.checked);
+    if (checkerToggle.checked) colorToggle.checked = false;
+    text.classList.toggle('checker', checkerToggle.checked);
+    text.classList.toggle('color', colorToggle.checked);
+  });
+  colorToggle.addEventListener('change', () => {
+    if (colorToggle.checked) checkerToggle.checked = false;
+    text.classList.toggle('checker', checkerToggle.checked);
+    text.classList.toggle('color', colorToggle.checked);
   });
 </script>
 
